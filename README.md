@@ -1,19 +1,71 @@
-# Issue #142
+# Shiny Manager Example
 
-https://github.com/virtualstaticvoid/heroku-buildpack-r/issues/142
+Example project for using [shinymanager][shinymgr] on Heroku with the container stack.
 
-## Description
+> `shinymanager` is a simple and secure authentication mechanism for single [Shiny][shiny] applications.
+> Credentials are stored in an encrypted ‘SQLite’ database. Password are hashed using ‘scrypt’ R package.
+> Source code of main application is protected until authentication is successful.
 
-[From issue description](https://github.com/virtualstaticvoid/heroku-buildpack-r/issues/142#issue-689547054):
+This project demonstrates a workaround for [heroku-buildpack-r][buildpack] [issue #142][issue_142]
 
-> I'm currently using this build-pack to host a shiny application on Heroku.
-> I need this app to have some basic authentication, so I found a library called "shinymanager" which works exactly like I want it too.
-> This library is hosted on the CRAN and can be found [here](https://cran.r-project.org/web/packages/shinymanager/index.html).
->
-> I first tried to install shiny manager through the recommended init.R file using the helpers.installPackages() command.
-> This did not work, so I then tried to install shiny manager locally by including the tar.gz file in my build.
-> I tried putting it in the main directory, as well as creating a folder called _localpckgs_, neither of these worked.
-> I also made sure to include "/app" in front of the path of the file, this also did not work.
->
-> I'm not sure why this package won't install, every time I build I get the error "there is no library called shinymanager".
-> I think it works with the R version being used, so not sure what other issues there could be.
+## Usage
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)][deployapp]
+
+### Build
+
+Run the following command to build the docker image.
+
+```
+docker build --tag shiny_manager_example .
+```
+
+### Run
+
+Run the following command to run the docker image.
+
+```
+docker run -p "8080:8080" shiny_manager_example
+```
+
+Open your web browser to http://localhost:8080.
+
+## Deploy to Heroku
+
+Run the following commands to create the Heroku application and deploy the code.
+
+Create a container stack application.
+
+```
+heroku create --stack=container
+```
+
+Deploy the code.
+
+```
+git push heroku main
+```
+
+View the application in your web browser
+
+```
+heroku open
+```
+
+Login with one of the following credentials:
+
+| Role  | User Name | Password |
+|-------|-----------|----------|
+| Admin | `admin`   |`p@ssw0rd`|
+| User  | `user`    |`p@ssw0rd`|
+
+## License
+
+MIT License. Copyright (c) 2021 Chris Stefano. See [LICENSE](LICENSE) for details.
+
+<!-- Links -->
+[buildpack]: https://github.com/virtualstaticvoid/heroku-buildpack-r
+[deployapp]: https://heroku.com/deploy?template=https://github.com/virtualstaticvoid/heroku-docker-r-shiny-manager-app/tree/main
+[issue_142]: https://github.com/virtualstaticvoid/heroku-buildpack-r/issues/142
+[shiny]: https://shiny.rstudio.com/
+[shinymgr]: https://datastorm-open.github.io/shinymanager/
