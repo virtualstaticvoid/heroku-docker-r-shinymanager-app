@@ -1,9 +1,11 @@
 library(shiny)
+library(shinymanager)
 
 # example from http://shiny.rstudio.com/gallery/kmeans-example.html
+# combined with https://datastorm-open.github.io/shinymanager/
 
 # Define UI for application that plots random distributions
-shinyUI(pageWithSidebar(
+page <- pageWithSidebar(
   headerPanel('Iris k-means clustering'),
   sidebarPanel(
     selectInput('xcol', 'X Variable', names(iris)),
@@ -15,4 +17,7 @@ shinyUI(pageWithSidebar(
   mainPanel(
     plotOutput('plot1')
   )
-))
+)
+
+# Wrap your UI with secure_app
+ui <- secure_app(page, enable_admin = TRUE)
