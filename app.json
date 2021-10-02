@@ -1,0 +1,18 @@
+{
+  "name": "heroku-docker-r-shiny-manager-app",
+  "stack": "container",
+  "description": "Example project for using shinymanager on Heroku.",
+  "keywords": [
+    "r",
+    "shiny",
+    "shinymanager"
+  ],
+  "repository": "https://github.com/virtualstaticvoid/heroku-docker-r-shiny-manager-app",
+  "logo": "https://github.com/virtualstaticvoid/heroku-docker-r-shiny-manager-app/raw/main/logo.png",
+  "success_url": "/",
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  }
+}
